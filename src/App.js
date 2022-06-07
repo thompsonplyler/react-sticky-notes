@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import StickyNoteContainer from "./components/StickyNoteContainer";
+import StickyNoteForm from "./components/StickyNoteForm";
+import {useState, React} from 'react'
+
+let array = [
+  {title: "Title from array",
+  content: "Content from array"},
+  {title: "Title from array 1",
+  content: "Content from array 1"},
+  {title: "Title from array 2",
+  content: "Content from array 2"},
+  {title: "Title from array 3",
+  content: "Content from array 3"},
+  {title: "Title from array 4",
+  content: "Content from array 4"}]
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [stickyNotes, setStickyNotes] = useState(array)
+
+  const formSubmitHandler = (values) => {
+    console.log("Values passed up: ", values)
+    setStickyNotes([values,...stickyNotes])
+  }
+
+  return <div>
+    <StickyNoteForm formSubmitHandler={formSubmitHandler} /> 
+    <StickyNoteContainer stickyNotes={stickyNotes} />
+    </div>;
 }
 
 export default App;
